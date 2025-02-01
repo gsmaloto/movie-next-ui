@@ -11,7 +11,7 @@ export default function Navbar() {
           href="/"
           className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text"
         >
-          PlayMo
+          next↣WATCH
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           <Link href="/movie" className="text-white font-medium">
