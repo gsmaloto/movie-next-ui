@@ -17,3 +17,7 @@ body {
     --radius: 0.5rem;
   }
 }
+
+.page-container {
+  @apply min-h-screen bg-[#1a1d29] text-white;
+}

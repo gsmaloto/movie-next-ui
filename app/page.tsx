@@ -1,69 +1,44 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { PlayCircle, Search, Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  PlayCircle,
+  Search,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { mockMovies, getImageUrl } from "@/lib/mock-data"
-import type { Movie } from "@/types/movie"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { mockMovies, getImageUrl } from "@/lib/mock-data";
+import type { Movie } from "@/types/movie";
+import Navbar from "@/components/shared/navbar";
 
 export default function Page() {
-  const featuredMovie = mockMovies[0]
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const featuredMovie = mockMovies[0];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 4 >= mockMovies.length ? 0 : prevIndex + 4))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex + 4 >= mockMovies.length ? 0 : prevIndex + 4
+    );
+  };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 4 < 0 ? mockMovies.length - 4 : prevIndex - 4))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex - 4 < 0 ? mockMovies.length - 4 : prevIndex - 4
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-[#1a1d29] text-white">
+    <div className="page-container">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-[#1a1d29] border-b border-gray-800">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text"
-          >
-            PlayMo
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/movie" className="text-white font-medium">
-              Movie
-            </Link>
-            <Link href="/series" className="text-gray-400 hover:text-white">
-              Series
-            </Link>
-            <Link href="/anime" className="text-gray-400 hover:text-white">
-              Anime
-            </Link>
-            <Link href="/tv-show" className="text-gray-400 hover:text-white">
-              TV Show
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input
-                type="search"
-                placeholder="Search"
-                className="w-64 pl-10 bg-gray-800 border-gray-700 text-sm rounded-full focus:ring-green-500"
-              />
-            </div>
-            <Button size="icon" variant="ghost" className="md:hidden">
-              <Search className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container px-4 py-8">
         {/* Hero Section */}
         <div className="relative h-[50vh] md:h-[70vh] rounded-xl overflow-hidden mb-8">
           <Image
@@ -75,14 +50,20 @@ export default function Page() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d29] to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 md:p-10 space-y-2 md:space-y-4 max-w-2xl">
-            <h1 className="text-2xl md:text-4xl font-bold">{featuredMovie.title}</h1>
-            <p className="text-sm md:text-base text-gray-300 line-clamp-2 md:line-clamp-3">{featuredMovie.overview}</p>
+            <h1 className="text-2xl md:text-4xl font-bold">
+              {featuredMovie.title}
+            </h1>
+            <p className="text-sm md:text-base text-gray-300 line-clamp-2 md:line-clamp-3">
+              {featuredMovie.overview}
+            </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
                 <span>{featuredMovie.vote_average.toFixed(1)}</span>
               </div>
-              <span className="text-gray-400">{new Date(featuredMovie.release_date).getFullYear()}</span>
+              <span className="text-gray-400">
+                {new Date(featuredMovie.release_date).getFullYear()}
+              </span>
             </div>
             <Link href={`/watch/${featuredMovie.id}`}>
               <Button className="bg-green-500 hover:bg-green-600">
@@ -100,19 +81,23 @@ export default function Page() {
         <MovieSection title="Hot New" movies={mockMovies.slice(0, 8)} />
       </main>
     </div>
-  )
+  );
 }
 
 function MovieSection({ title, movies }: { title: string; movies: Movie[] }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 4 >= movies.length ? 0 : prevIndex + 4))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex + 4 >= movies.length ? 0 : prevIndex + 4
+    );
+  };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 4 < 0 ? movies.length - 4 : prevIndex - 4))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex - 4 < 0 ? movies.length - 4 : prevIndex - 4
+    );
+  };
 
   return (
     <section className="mb-8">
@@ -133,7 +118,7 @@ function MovieSection({ title, movies }: { title: string; movies: Movie[] }) {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
 function MovieCard({ movie }: { movie: Movie }) {
@@ -156,8 +141,9 @@ function MovieCard({ movie }: { movie: Movie }) {
         </div>
       </div>
       <h3 className="mt-2 text-sm font-medium truncate">{movie.title}</h3>
-      <p className="text-xs text-gray-400">{new Date(movie.release_date).getFullYear()}</p>
+      <p className="text-xs text-gray-400">
+        {new Date(movie.release_date).getFullYear()}
+      </p>
     </Link>
-  )
+  );
 }
-
