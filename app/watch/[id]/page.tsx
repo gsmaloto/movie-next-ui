@@ -1,5 +1,6 @@
 import Navbar from "@/components/shared/navbar";
 import ShowDetail from "@/components/shared/show-detail";
+import { Badge } from "@/components/ui/badge";
 import { movieDetails } from "@/lib/data/movie-details";
 import { Star } from "lucide-react";
 
@@ -120,12 +121,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
             {movieDetails?.genres && (
               <div className="flex flex-wrap gap-3 mt-4">
                 {movieDetails?.genres.map((genre) => (
-                  <span
-                    key={genre.id}
-                    className="px-4 py-2 text-md font-medium bg-gray-800 rounded-lg"
-                  >
-                    {genre.name}
-                  </span>
+                  <Badge key={genre.id}>{genre.name}</Badge>
                 ))}
               </div>
             )}
