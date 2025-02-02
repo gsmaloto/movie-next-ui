@@ -40,7 +40,7 @@ export default function FeaturedShow({
           </span>
         </div>
         <Link href={`/watch/${featuredMovie.id}`}>
-          <Button className="bg-green-500 hover:bg-green-600">
+          <Button>
             <PlayCircle className="w-4 h-4 mr-2" />
             Watch now
           </Button>
