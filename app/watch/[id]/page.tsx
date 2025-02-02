@@ -1,6 +1,6 @@
 import Navbar from "@/components/shared/navbar";
-import { mockMovies } from "@/lib/data/mock-data";
 import { movieDetails } from "@/lib/data/movie-details";
+import { Star } from "lucide-react";
 
 export default function WatchPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -8,6 +8,9 @@ export default function WatchPage({ params }: { params: { id: string } }) {
   const posterPath = movieDetails?.poster_path
     ? `https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}`
     : "https://www.popcorn.app/assets/app/images/placeholder-movieimage.png";
+
+  const rating = movieDetails?.vote_average || 0;
+  const maxRating = 10; // Assuming max rating is 10
 
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -36,12 +39,28 @@ export default function WatchPage({ params }: { params: { id: string } }) {
         {/* Movie Details Section */}
         <div className="mt-8 flex flex-col md:flex-row gap-8">
           {/* Poster Image */}
-          <img
-            src={posterPath}
-            alt={movieDetails?.title}
-            className="w-64 self-center object-cover rounded-lg shadow-lg border border-gray-700"
-            loading="lazy"
-          />
+          <div className="flex flex-col items-center">
+            <img
+              src={posterPath}
+              alt={movieDetails?.title}
+              className="w-64 object-cover rounded-lg shadow-lg border border-gray-700"
+              loading="lazy"
+            />
+
+            {/* Rating Progress Bar with Icon */}
+            <div className="w-full mt-4">
+              <label className="text-lg text-gray-400 font-semibold mb-2 flex items-center gap-2">
+                <Star fill="yellow" size={32} strokeWidth={0} />{" "}
+                {/* Star icon */}
+                {rating.toFixed(1)} / {movieDetails?.vote_count} voted
+              </label>
+              <progress
+                className="w-full h-2 bg-gray-700"
+                value={rating}
+                max={maxRating}
+              ></progress>
+            </div>
+          </div>
 
           {/* Movie Info */}
           <div className="md:col-span-2 flex flex-col space-y-6">
@@ -63,10 +82,6 @@ export default function WatchPage({ params }: { params: { id: string } }) {
                   Release Date:
                 </span>{" "}
                 {movieDetails?.release_date}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Rating:</span>{" "}
-                {movieDetails?.vote_average} ({movieDetails?.vote_count} votes)
               </p>
               <p>
                 <span className="font-semibold text-gray-400">Popularity:</span>{" "}
