@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Video, VideoIcon } from "lucide-react";
+import VideoPlayer from "./video-player";
 
 interface TrailerModalProps {
   trailerUrl: string;
@@ -27,17 +28,7 @@ export default function TrailerModal({ trailerUrl }: TrailerModalProps) {
       </DialogTrigger>
 
       <DialogContent className="w-full max-w-4xl bg-gray-900 rounded-lg shadow-xl p-2 ">
-        <div className="relative aspect-video w-full bg-black rounded-lg overflow-hidden">
-          <iframe
-            className="w-full h-full"
-            src={trailerUrl}
-            title="Movie Trailer"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        </div>
+        <VideoPlayer srcUrl={trailerUrl} />
       </DialogContent>
     </Dialog>
   );

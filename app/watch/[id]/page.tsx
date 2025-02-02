@@ -5,6 +5,7 @@ import { movieDetails } from "@/lib/data/movie-details";
 import { Star } from "lucide-react";
 import TrailerModal from "@/components/shared/trailer-modal";
 import { movieVideos } from "@/lib/data/movie-videos";
+import VideoPlayer from "@/components/shared/video-player";
 
 export default function WatchPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -85,14 +86,9 @@ export default function WatchPage({ params }: { params: { id: string } }) {
       </div>
 
       <div className="relative container px-6 py-12 mx-auto max-w-6xl">
-        {/* Video Player */}
-        <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl border border-gray-700">
-          <iframe
-            className="w-full h-full"
-            src={`https://vidsrc.cc/v2/embed/movie/${id}?autoPlay=false`}
-            allowFullScreen
-          ></iframe>
-        </div>
+        <VideoPlayer
+          srcUrl={`https://vidsrc.cc/v2/embed/movie/${id}?autoPlay=false`}
+        />
 
         {/* Movie Details Section */}
         <div className="mt-8 flex flex-col md:flex-row gap-8">
