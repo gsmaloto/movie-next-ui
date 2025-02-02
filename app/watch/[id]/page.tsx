@@ -1,4 +1,5 @@
 import Navbar from "@/components/shared/navbar";
+import ShowDetail from "@/components/shared/show-detail";
 import { movieDetails } from "@/lib/data/movie-details";
 import { Star } from "lucide-react";
 
@@ -11,6 +12,53 @@ export default function WatchPage({ params }: { params: { id: string } }) {
 
   const rating = movieDetails?.vote_average || 0;
   const maxRating = 10; // Assuming max rating is 10
+
+  const movieData = [
+    {
+      label: "Runtime",
+      value: `${movieDetails?.runtime} min`,
+    },
+    {
+      label: "Release Date",
+      value: movieDetails?.release_date,
+    },
+    {
+      label: "Popularity",
+      value: movieDetails?.popularity,
+    },
+    {
+      label: "Language",
+      value: movieDetails?.original_language,
+    },
+    {
+      label: "Tagline",
+      value: movieDetails?.tagline,
+    },
+    {
+      label: "Status",
+      value: movieDetails?.status,
+    },
+    {
+      label: "Budget",
+      value: movieDetails?.budget?.toLocaleString(),
+    },
+    {
+      label: "Revenue",
+      value: movieDetails?.revenue?.toLocaleString(),
+    },
+    {
+      label: "Production Countries",
+      value: movieDetails?.production_countries
+        .map((country) => country.name)
+        .join(", "),
+    },
+    {
+      label: "Spoken Languages",
+      value: movieDetails?.spoken_languages
+        .map((lang) => lang.english_name)
+        .join(", "),
+    },
+  ];
 
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -67,63 +115,6 @@ export default function WatchPage({ params }: { params: { id: string } }) {
             <h1 className="text-4xl font-bold text-gray-200">
               {movieDetails?.title}
             </h1>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              {movieDetails?.overview}
-            </p>
-
-            {/* Additional Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-              <p>
-                <span className="font-semibold text-gray-400">Runtime:</span>{" "}
-                {movieDetails?.runtime} min
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">
-                  Release Date:
-                </span>{" "}
-                {movieDetails?.release_date}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Popularity:</span>{" "}
-                {movieDetails?.popularity}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Language:</span>{" "}
-                {movieDetails?.original_language}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Tagline:</span>{" "}
-                {movieDetails?.tagline || "N/A"}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Status:</span>{" "}
-                {movieDetails?.status}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Budget:</span> $
-                {movieDetails?.budget?.toLocaleString()}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">Revenue:</span> $
-                {movieDetails?.revenue?.toLocaleString()}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">
-                  Production Countries:
-                </span>{" "}
-                {movieDetails?.production_countries
-                  ?.map((country) => country.name)
-                  .join(", ") || "N/A"}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-400">
-                  Spoken Languages:
-                </span>{" "}
-                {movieDetails?.spoken_languages
-                  ?.map((lang) => lang.english_name)
-                  .join(", ") || "N/A"}
-              </p>
-            </div>
 
             {/* Genres */}
             {movieDetails?.genres && (
@@ -139,6 +130,20 @@ export default function WatchPage({ params }: { params: { id: string } }) {
               </div>
             )}
 
+            <p className="text-gray-300 text-lg leading-relaxed">
+              {movieDetails?.overview}
+            </p>
+
+            {/* Additional Details */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+              {movieData.map((item) => (
+                <ShowDetail
+                  key={item.label}
+                  label={item.label}
+                  value={item.value}
+                />
+              ))}
+            </div>
             {/* Production Companies */}
             {movieDetails?.production_companies && (
               <div className="mt-6">
