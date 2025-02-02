@@ -1,15 +1,9 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Video, VideoIcon } from "lucide-react";
+import { VideoIcon } from "lucide-react";
 import VideoPlayer from "./video-player";
 
 interface TrailerModalProps {
