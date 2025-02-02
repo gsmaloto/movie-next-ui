@@ -13,15 +13,18 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { mockMovies, getImageUrl } from "@/lib/mock-data";
+import { mockMovies, getImageUrl } from "@/lib/data/mock-data";
 import type { Movie } from "@/types/movie";
 import Navbar from "@/components/shared/navbar";
 import FeaturedShow from "@/components/shared/featured-show";
 import ShowCard from "@/components/shared/show-card";
+import { nowPlaying } from "@/lib/data/now-playing";
+import { upcoming } from "@/lib/data/upcoming";
+import { topRated } from "@/lib/data/top-rated";
+import { popular } from "@/lib/data/popular";
 
 export default function Page() {
-  const featuredMovie =
-    mockMovies[Math.floor(Math.random() * mockMovies.length)];
+  const featuredMovie = mockMovies[1];
   const [, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -45,11 +48,17 @@ export default function Page() {
         {/* Hero Section */}
         <FeaturedShow featuredMovie={featuredMovie} />
 
+        {/* Now Playing Section */}
+        <MovieSection title="Now Playing" movies={nowPlaying.results} />
+
         {/* Popular Section */}
-        <MovieSection title="Popular" movies={mockMovies.slice(0, 8)} />
+        <MovieSection title="Popular" movies={popular.results} />
 
         {/* Hot New Section */}
-        <MovieSection title="Hot New" movies={mockMovies.slice(0, 8)} />
+        <MovieSection title="Upcoming" movies={upcoming.results} />
+
+        {/* Top Rated Section */}
+        <MovieSection title="Top Rated" movies={topRated.results} />
       </main>
     </div>
   );
