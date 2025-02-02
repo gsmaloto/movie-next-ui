@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
 import { Button } from "../ui/button";
-import { getImageUrl } from "@/lib/mock-data";
+import { getImageUrl } from "@/lib/data/mock-data";
 import { Movie } from "@/types/movie";
 import Image from "next/image";
 

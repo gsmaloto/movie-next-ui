@@ -2,7 +2,7 @@ import { PlayCircle } from "lucide-react";
 
 import { Star } from "lucide-react";
 
-import { getImageUrl } from "@/lib/mock-data";
+import { getImageUrl } from "@/lib/data/mock-data";
 
 import { Movie } from "@/types/movie";
 import Image from "next/image";
