@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { mockMovies, getImageUrl } from "@/lib/data/mock-data";
+import { mockMovies } from "@/lib/data/mock-data";
 import Navbar from "@/components/shared/navbar";
 import FeaturedShow from "@/components/shared/featured-show";
 import { nowPlaying } from "@/lib/data/now-playing";
@@ -12,7 +11,6 @@ import MovieSection from "@/components/shared/show-section";
 
 export default function Page() {
   const featuredMovie = mockMovies[1];
-  const [, setCurrentIndex] = useState(0);
 
   return (
     <div className="page-container">
