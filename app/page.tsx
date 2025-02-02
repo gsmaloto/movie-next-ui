@@ -14,18 +14,6 @@ export default function Page() {
   const featuredMovie = mockMovies[1];
   const [, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 4 >= mockMovies.length ? 0 : prevIndex + 4
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 4 < 0 ? mockMovies.length - 4 : prevIndex - 4
-    );
-  };
-
   return (
     <div className="page-container">
       {/* Header */}
