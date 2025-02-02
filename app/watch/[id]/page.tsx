@@ -3,6 +3,8 @@ import ShowDetail from "@/components/shared/show-detail";
 import { Badge } from "@/components/ui/badge";
 import { movieDetails } from "@/lib/data/movie-details";
 import { Star } from "lucide-react";
+import TrailerModal from "@/components/shared/trailer-modal";
+import { movieVideos } from "@/lib/data/movie-videos";
 
 export default function WatchPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -12,7 +14,14 @@ export default function WatchPage({ params }: { params: { id: string } }) {
     : "https://www.popcorn.app/assets/app/images/placeholder-movieimage.png";
 
   const rating = movieDetails?.vote_average || 0;
-  const maxRating = 10; // Assuming max rating is 10
+  const maxRating = 10;
+
+  const trailerKey = movieVideos?.results?.find(
+    (video: any) => video.type === "Trailer"
+  )?.key;
+
+  const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
+  console.log(trailerUrl);
 
   const movieData = [
     {
@@ -95,12 +104,12 @@ export default function WatchPage({ params }: { params: { id: string } }) {
               className="w-64 object-cover rounded-lg shadow-lg border border-gray-700"
               loading="lazy"
             />
-
+            <TrailerModal trailerUrl={trailerUrl} />{" "}
+            {/* Add the trailer dialog */}
             {/* Rating Progress Bar with Icon */}
             <div className="w-full mt-4">
               <label className="text-lg text-gray-400 font-semibold mb-2 flex items-center gap-2">
                 <Star fill="yellow" size={32} strokeWidth={0} />{" "}
-                {/* Star icon */}
                 {rating.toFixed(1)} / {movieDetails?.vote_count} voted
               </label>
               <progress
