@@ -1,23 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  PlayCircle,
-  Search,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { mockMovies, getImageUrl } from "@/lib/data/mock-data";
-import type { Movie } from "@/types/movie";
 import Navbar from "@/components/shared/navbar";
 import FeaturedShow from "@/components/shared/featured-show";
-import ShowCard from "@/components/shared/show-card";
 import { nowPlaying } from "@/lib/data/now-playing";
 import { upcoming } from "@/lib/data/upcoming";
 import { topRated } from "@/lib/data/top-rated";
