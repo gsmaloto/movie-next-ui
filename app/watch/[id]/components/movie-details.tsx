@@ -2,16 +2,17 @@ import ShowDetail from "@/components/shared/show-detail";
 import TrailerModal from "@/components/shared/trailer-modal";
 import { Badge } from "@/components/ui/badge";
 import { movieVideos } from "@/lib/data/movie-videos";
+import {
+  MovieDetailsType,
+  ProductionCountry,
+  SpokenLanguage,
+} from "@/types/movie-details";
+import { MovieVideo } from "@/types/movie-video";
 import { Star } from "lucide-react";
 
-type MovieDetailsProps = {
-  movieDetails: any;
-  posterPath: string;
-  trailerUrl: string;
-  rating: number;
-};
-
-export default function MovieDetails(props: MovieDetailsProps) {
+export default function MovieDetails(props: {
+  movieDetails: MovieDetailsType;
+}) {
   const { movieDetails } = props;
 
   const posterPath = movieDetails?.poster_path
@@ -22,7 +23,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
   const maxRating = 10;
 
   const trailerKey = movieVideos?.results?.find(
-    (video: any) => video.type === "Trailer"
+    (video: MovieVideo) => video.type === "Trailer"
   )?.key;
 
   const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
@@ -64,13 +65,13 @@ export default function MovieDetails(props: MovieDetailsProps) {
     {
       label: "Production Countries",
       value: movieDetails?.production_countries
-        .map((country) => country.name)
+        .map((country: ProductionCountry) => country.name)
         .join(", "),
     },
     {
       label: "Spoken Languages",
       value: movieDetails?.spoken_languages
-        .map((lang) => lang.english_name)
+        .map((lang: SpokenLanguage) => lang.english_name)
         .join(", "),
     },
   ];

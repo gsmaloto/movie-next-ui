@@ -2,10 +2,11 @@ import Navbar from "@/components/shared/navbar";
 import VideoPlayer from "@/components/shared/video-player";
 import MovieDetails from "./components/movie-details";
 import BgImageOverlay from "@/components/shared/bg-image-overlay";
+import { RequestOption } from "@/types/request-option";
 
 const fetchMovieDetails = async (id: string) => {
   const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
-  const options = {
+  const options: RequestOption = {
     method: "GET",
     headers: {
       accept: "application/json",
@@ -14,7 +15,7 @@ const fetchMovieDetails = async (id: string) => {
     cache: "no-store",
   };
 
-  const res = await fetch(url, options);
+  const res = await fetch(url, options as RequestInit);
   if (!res.ok) throw new Error("Failed to fetch movie details");
   return res.json();
 };
