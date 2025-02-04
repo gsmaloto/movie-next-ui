@@ -86,7 +86,7 @@ export default function MovieDetails(props: {
           className="w-64 object-cover rounded-lg shadow-lg border border-gray-700"
           loading="lazy"
         />
-        <TrailerModal trailerUrl={trailerUrl} /> {/* Add the trailer dialog */}
+        <TrailerModal trailerUrl={trailerUrl} />
         {/* Rating Progress Bar with Icon */}
         <div className="w-full mt-4">
           <label className="text-lg text-gray-400 font-semibold mb-2 flex items-center gap-2">
