@@ -1,7 +1,7 @@
 export type MovieDetailsType = {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: null | any; // You can define a specific type if needed
+  belongs_to_collection: string | null;
   budget: number;
   genres: Genre[];
   homepage: string;

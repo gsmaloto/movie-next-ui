@@ -3,6 +3,7 @@ import VideoPlayer from "@/components/shared/video-player";
 import MovieDetails from "./components/movie-details";
 import BgImageOverlay from "@/components/shared/bg-image-overlay";
 import { RequestOption } from "@/types/request-option";
+import { MovieDetailsType } from "@/types/movie-details";
 
 const fetchMovieDetails = async (id: string) => {
   const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
@@ -26,7 +27,7 @@ export default async function WatchPage({
   params: { id: string };
 }) {
   const { id } = params;
-  const movieDetails = await fetchMovieDetails(id);
+  const movieDetails: MovieDetailsType = await fetchMovieDetails(id);
 
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
