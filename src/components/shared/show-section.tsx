@@ -1,13 +1,13 @@
-import ShowCard from "./show-card";
-import { Show } from "@/types/show";
+import MediaShowCard, { MediaShowCardProps } from "./show-card";
 
 export default function MovieSection({
   title,
-  movies,
+  shows,
 }: {
   title: string;
-  shows: Show[];
+  shows: MediaShowCardProps[];
 }) {
+  console.log("CHECK_SHOWS", shows);
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4">
@@ -21,9 +21,9 @@ export default function MovieSection({
           className="flex gap-4"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
-          {movies.map((movie) => (
-            <div key={movie.id} className="flex-none w-1/4 snap-center">
-              <ShowCard movie={movie} />
+          {shows.map((show) => (
+            <div key={show.id} className="flex-none w-1/4 snap-center">
+              <MediaShowCard media={show} />
             </div>
           ))}
         </div>

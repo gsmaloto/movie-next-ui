@@ -1,6 +1,4 @@
-import type { Movie } from "@/types/movie";
-
-export const mockMovies: Movie[] = [
+export const mockMovies = [
   {
     id: 939243,
     title: "Sonic the Hedgehog 3",

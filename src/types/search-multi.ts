@@ -1,6 +1,9 @@
+import { Movie } from "./movie";
+import { MediaShowCardProps } from "@/components/shared/show-card";
+
 export type SearchMulti = {
   page: number;
-  results: SearchMultiResult[];
+  results: (Movie & MediaShowCardProps)[];
   total_pages: number;
   total_results: number;
 };

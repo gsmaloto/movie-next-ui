@@ -1,10 +1,9 @@
 import Navbar from "@/components/shared/navbar";
-import ShowCard from "@/components/shared/show-card";
-import TvShowCard from "@/components/shared/tv-show-card";
-import { Badge } from "@/components/ui/badge";
+import MediaShowCard from "@/components/shared/show-card";
 import { RequestOption } from "@/types/request-option";
 import { SearchMulti } from "@/types/search-multi";
 import MediaPagination from "@/components/shared/media-pagination";
+import { Movie } from "@/types/movie";
 const getSearchShows = async (query: string, page: number) => {
   try {
     const url = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(
@@ -22,10 +21,19 @@ const getSearchShows = async (query: string, page: number) => {
     const res = await fetch(url, options as RequestInit);
     if (!res.ok) throw new Error("Failed to fetch search results");
     const data = await res.json();
-    const filteredResults = data.results.filter(
-      (result: any) =>
-        result.media_type === "movie" || result.media_type === "tv"
-    );
+    const filteredResults = data.results
+      .filter(
+        (result: Movie) =>
+          result.media_type === "movie" || result.media_type === "tv"
+      )
+      .map((result: Movie) => ({
+        id: result.id,
+        title: result.title || result.name,
+        posterPath: result.poster_path,
+        voteAverage: result.vote_average,
+        releaseDate: result.first_air_date || result.release_date,
+        mediaType: result.media_type,
+      }));
     return { ...data, results: filteredResults };
   } catch (error) {
     console.error("Error fetching search results:", error);
@@ -76,7 +84,7 @@ export default async function SearchPage({
 
       <div className="container px-6 py-12 mx-auto max-w-6xl">
         <h1 className="text-3xl mb-4">
-          Search Results for <span className="font-bold">"{query}"</span>
+          Search Results for <span className="font-bold">{`"${query}"`}</span>
         </h1>
         <MediaPagination
           currentPage={searchShows.page}
@@ -84,14 +92,9 @@ export default async function SearchPage({
           query={query}
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {searchShows.results.map((show) => (
+          {searchShows.results.map((show: Movie) => (
             <div key={show.id}>
-              <Badge>{show.media_type.toUpperCase()}</Badge>
-              {show.media_type === "movie" ? (
-                <ShowCard key={show.id} movie={show} />
-              ) : (
-                <TvShowCard key={show.id} tvShow={show} />
-              )}
+              <MediaShowCard key={show.id} media={show} />
             </div>
           ))}
         </div>
