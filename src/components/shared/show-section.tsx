@@ -1,12 +1,12 @@
 import ShowCard from "./show-card";
-import { Movie } from "@/types/movie";
+import { Show } from "@/types/show";
 
 export default function MovieSection({
   title,
   movies,
 }: {
   title: string;
-  movies: Movie[];
+  shows: Show[];
 }) {
   return (
     <section className="mb-8">
