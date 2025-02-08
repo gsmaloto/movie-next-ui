@@ -1,5 +1,4 @@
 "use client";
-
 import { mockMovies } from "@/lib/data/mock-data";
 import Navbar from "@/components/shared/navbar";
 import FeaturedShow from "@/components/shared/featured-show";

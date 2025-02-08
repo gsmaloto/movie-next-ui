@@ -2,20 +2,8 @@ import Navbar from "@/components/shared/navbar";
 import ShowCard from "@/components/shared/show-card";
 import TvShowCard from "@/components/shared/tv-show-card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { RequestOption } from "@/types/request-option";
 import { SearchMulti } from "@/types/search-multi";
-import Link from "next/link";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationLink,
-  PaginationEllipsis,
-} from "@/components/ui/pagination";
 import MediaPagination from "@/components/shared/media-pagination";
 const getSearchShows = async (query: string, page: number) => {
   try {
