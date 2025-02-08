@@ -39,7 +39,7 @@ export default async function SearchPage({
   searchParams: { query: string; page: number };
 }) {
   const { query, page } = searchParams;
-  const pageNumber = page ? parseInt(page) : 1;
+  const pageNumber = page ? parseInt(String(page)) : 1;
   console.log("query", query);
   const searchShows: SearchMulti | null = await getSearchShows(
     query,
