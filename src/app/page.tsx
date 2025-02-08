@@ -21,16 +21,16 @@ export default function Page() {
         <FeaturedShow featuredMovie={featuredMovie} />
 
         {/* Now Playing Section */}
-        <MovieSection title="Now Playing" movies={nowPlaying.results} />
+        <MovieSection title="Now Playing" shows={nowPlaying.results} />
 
         {/* Popular Section */}
-        <MovieSection title="Popular" movies={popular.results} />
+        <MovieSection title="Popular" shows={popular.results} />
 
         {/* Hot New Section */}
-        <MovieSection title="Upcoming" movies={upcoming.results} />
+        <MovieSection title="Upcoming" shows={upcoming.results} />
 
         {/* Top Rated Section */}
-        <MovieSection title="Top Rated" movies={topRated.results} />
+        <MovieSection title="Top Rated" shows={topRated.results} />
       </main>
     </div>
   );
